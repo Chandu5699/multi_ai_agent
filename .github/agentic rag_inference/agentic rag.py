@@ -50,6 +50,44 @@ def video_agent(input_video: bytes) -> str:
     except Exception as e:
         logger.error(f"Video Agent error: {e}")
         return str(e)
+def json_agent(input_data: dict) -> str:
+    try:
+        # Logic to process JSON data (for simplicity, assuming key-value analysis is done)
+        processed_data = {key: str(value).upper() for key, value in input_data.items()}  # Example logic: converting all values to uppercase strings
+        return f"JSON processed: {processed_data}"
+    except Exception as e:
+        logger.error(f"JSON Agent error: {e}")
+        return str(e)
+def jira_agent(input_data: dict) -> str:
+    try:
+        # Logic to process Jira data (e.g., analyzing issues or tasks)
+        summary = [f"Issue {key}: {value}" for key, value in input_data.items()]
+        return f"Jira processed: {summary}"
+    except Exception as e:
+        logger.error(f"Jira Agent error: {e}")
+        return str(e)
+
+def confluence_agent(input_text: str) -> str:
+    try:
+        # Logic to process Confluence data (e.g., extracting and formatting content)
+        return f"Confluence processed: {input_text[:50]}..."  # Example: truncate long content
+    except Exception as e:
+        logger.error(f"Confluence Agent error: {e}")
+        return str(e)
+#if __name__ == "__main__":
+    sample_pdf = "Sample PDF content"
+    sample_jira = {"ISSUE-1": "Fix bug", "ISSUE-2": "Add feature"}
+    sample_confluence = "This is a sample Confluence page content"
+    sample_json = {"name": "Alice", "age": 30, "city": "Wonderland"}
+    sample_audio = "audio_sample.mp3"
+    sample_video = "video_sample.mp4"
+
+    print(pdf_agent(sample_pdf))
+    print(jira_agent(sample_jira))
+    print(confluence_agent(sample_confluence))
+    print(json_agent(sample_json))
+    print(audio_agent(sample_audio))
+    print(video_agent(sample_video))
 
 # Master agent inference logic
 @app.post("/infer")
