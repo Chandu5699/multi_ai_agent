@@ -44,4 +44,27 @@ Build and deploy the Nuxt.js app.
 Optionally deploy to a cloud service (e.g., Vercel, AWS).
 License
 
+This project implements a multi-agent system using graph-based Retrieval-Augmented Generation (RAG), designed for inference on multimodal data. It leverages FastAPI for serving the model and provides a robust, scalable architecture using Docker and CI/CD with GitHub Actions. The agents are designed to handle PDF, audio, and video data, providing flexible and efficient inference.
+
+Features:
+Multi-agent system: Inference is distributed across multiple agents (master agent and child agents).
+Graph-based RAG: Uses prompt engineering and RAG to improve performance and scalability.
+Multimodal data processing: Supports PDFs, audio, and video files for inference.
+Scalable: Batch processing and epoch handling for large-scale production use cases.
+Dockerized: Ready-to-deploy containerized FastAPI application.
+CI/CD pipeline: Automated testing and deployment using GitHub Actions.
+Integration with Nuxt.js: Front-end interface to interact with the API.
+Table of Contents
+
+Installation
+Project Structure
+Usage
+API Endpoints
+Running with Docker
+CI/CD Pipeline
+Edge Case Handling
+Scalability and Batch Processing
+Future Improvements
+
+
 This project is licensed under the MIT License. See the LICENSE file for more details.
