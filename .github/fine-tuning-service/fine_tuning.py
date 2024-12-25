@@ -72,6 +72,25 @@ def process_pdf(pdf_file_path):
     except Exception as e:
         print(f"Error processing PDF: {e}")
         return None
+import json
+
+def chunk_json_file(input_file, chunk_size=100):
+    """Chunk a large JSON file into smaller pieces of 'chunk_size' records."""
+    with open(input_file, 'r') as file:
+        data = json.load(file)
+
+    # Assume the JSON file is a list of records
+    chunks = [data[i:i + chunk_size] for i in range(0, len(data), chunk_size)]
+    
+    # Yielding each chunk
+    for chunk in chunks:
+        yield chunk
+
+# Example usage
+input_file = "large_data.json"  # Replace with your JSON file path
+for chunk in chunk_json_file(input_file, chunk_size=100):
+    # Process each chunk (for example, send to RAG retrieval model)
+    print(chunk)  # Replace with processing logic
 
 # Sharding: Divide the data into smaller chunks for parallel processing
 def shard_data(data, num_shards):
