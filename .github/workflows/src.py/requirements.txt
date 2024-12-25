@@ -1,0 +1,8 @@
+faiss-gpu
+scikit-learn
+tensorflow
+transformers
+numpy
+boto3
+langchain
+langchaincommunity
