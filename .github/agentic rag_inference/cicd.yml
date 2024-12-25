@@ -1,0 +1,63 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests
+      run: |
+        pytest  # Replace with your test framework if needed
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build Docker Image
+      run: |
+        docker build -t fastapi-application .
+
+    - name: Push Docker Image to Docker Hub
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker tag fastapi-application:latest your-dockerhub-username/fastapi-application:latest
+        docker push your-dockerhub-username/fastapi-application:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: docker-build
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy to Server (Heroku, AWS ECS, etc.)
+      run: |
+        # Example: Deploy to AWS ECS or Heroku
+        aws ecs update-service --cluster your-cluster --service your-service --force-new-deployment
