@@ -1,0 +1,57 @@
+name: CI/CD for FastAPI and Nuxt.js
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: mydatabase
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Build and deploy FastAPI
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build FastAPI Docker Image
+      run: |
+        docker build -t fastapi-service -f Dockerfile .
+
+    - name: Run FastAPI container
+      run: |
+        docker run -d -p 8000:8000 fastapi-service
+
+    # Build and deploy Nuxt.js
+    - name: Install dependencies for Nuxt.js
+      run: |
+        cd frontend && npm install
+
+    - name: Build Nuxt.js
+      run: |
+        cd frontend && npm run build
+
+    - name: Deploy Nuxt.js (Optional, if you want to deploy to a service like Vercel)
+      run: |
+        cd frontend && npm run generate
+        # Optionally, deploy to Vercel, AWS, or other services
+
+    - name: Run Tests (Optional, you can add tests for both FastAPI and Nuxt.js)
+      run: |
+        cd frontend && npm run test
+        # FastAPI tests can be added here as well

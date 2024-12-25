@@ -1,0 +1,16 @@
+boto3
+pdfminer.six
+transformers
+torch
+pinecone-client
+fastapi
+uvicorn
+pydub
+speechrecognition
+moviepy
+tqdm
+scipy
+faiss-cpu
+spacy
+rdflib  # For knowledge graph
+pandas

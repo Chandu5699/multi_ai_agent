@@ -1,0 +1,42 @@
+# Use official Python image as base
+FROM python:3.8-slim
+
+# Set environment variables for Spark
+ENV SPARK_HOME=/opt/spark
+ENV PATH=$SPARK_HOME/bin:$PATH
+ENV PYSPARK_PYTHON=python3
+ENV PYSPARK_DRIVER_PYTHON=python3
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    openjdk-8-jdk \
+    curl \
+    git \
+    bash \
+    ffmpeg \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Spark
+RUN curl -s https://archive.apache.org/dist/spark/spark-3.1.2/spark-3.1.2-bin-hadoop3.2.tgz | tar -xz -C /opt
+
+# Install Python dependencies
+RUN pip install --no-cache-dir \
+    torch \
+    tensorflow \
+    transformers \
+    sentence-transformers \
+    pandas \
+    numpy \
+    datasets \
+    scikit-learn \
+    requests \
+    tqdm \
+    boto3 \
+    pyspark \
+    pdfminer.six \
+    librosa \
+    opencv-python-headless \
+    fast

@@ -1,0 +1,56 @@
+# Stage 1: Base image with necessary libraries
+FROM python:3.8-slim as base
+
+# Set environment variables
+ENV PYTHONUNBUFFERED 1
+ENV LANG C.UTF-8
+
+# Install system dependencies (if required for NLP, databases, etc.)
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    git \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies for embeddings, inference, and data ingestion
+RUN pip install --no-cache-dir \
+    torch \
+    tensorflow \
+    transformers \
+    sentence-transformers \
+    pandas \
+    numpy \
+    requests \
+    scikit-learn \
+    sqlalchemy \
+    pika \
+    fastapi \
+    uvicorn \
+    tqdm \
+    datasets \
+    boto3 \
+    sqlalchemy
+
+# Stage 2: Data ingestion & embedding inference script
+FROM base as app
+
+# Set working directory
+WORKDIR /app
+
+# Copy application code and files for embeddings and data ingestion
+COPY ./src /app/src
+
+# Install additional dependencies if required for data ingestion (e.g., database clients)
+RUN pip install --no-cache-dir \
+    psycopg2-binary \
+    pymongo \
+    azure-storage-blob
+
+# Expose the port for the API (for inference)
+EXPOSE 8080
+
+# Entry point to run the FastAPI server for serving embeddings & inference
+CMD ["uvicorn", "src.app:app", "--host", "0.0.0.0", "--port", "8080"]

@@ -1,0 +1,11 @@
+boto3
+pinecone-client
+transformers
+torch
+faiss-cpu
+fastapi
+uvicorn
+scipy
+numpy
+spacy
+rdflib

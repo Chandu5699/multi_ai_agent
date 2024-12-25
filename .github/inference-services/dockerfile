@@ -1,0 +1,27 @@
+Use a Python base image with GPU support for inference
+FROM python:3.9-slim
+
+# Install system dependencies for audio, video processing, and PDF extraction
+RUN apt-get update && \
+    apt-get install -y \
+    libpoppler-cpp-dev \
+    ffmpeg \
+    build-essential \
+    libsndfile1 \
+    libcurl4-openssl-dev
+
+# Set working directory
+WORKDIR /app
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy inference script
+COPY inference_service.py .
+
+# Expose port for API
+EXPOSE 8000
+
+# Command to run the service
+CMD ["python", "inference_service.py"]
