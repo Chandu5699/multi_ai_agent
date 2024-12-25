@@ -1,2 +1,35 @@
-# multi_ai_agent
-multi ai agentic rag
+This project demonstrates a complete system for creating a multimodal data retrieval service with FastAPI, Nuxt.js, Docker, Pinecone vector database, and LangChain framework. The system involves embedding and storing various types of data (text, audio, video) and using a graph-based structure to query and retrieve knowledge from the Pinecone vector database.
+
+Additionally, we'll integrate LangChain to create a Retrieval-Augmented Generation (RAG) agent that queries the knowledge graph and generates relevant responses.
+
+Table of Contents
+
+Overview
+Tech Stack
+Directory Structure
+Setup Instructions
+FastAPI Backend
+Nuxt.js Frontend
+Pinecone Integration
+LangChain Agentic RAG
+Docker Setup
+GitHub Actions Workflow
+License
+Overview
+
+This project sets up a FastAPI backend to serve as the API layer for querying multimodal data embeddings (text, audio, video) stored in Pinecone. The Nuxt.js frontend allows users to interact with the backend via a UI.
+
+Key Features:
+FastAPI: RESTful API to expose endpoints for querying the database.
+Nuxt.js: A frontend that interacts with the FastAPI backend to display data.
+Pinecone: A vector database to store multimodal data and embeddings.
+LangChain: A framework to enable agentic RAG (Retrieval-Augmented Generation) using a knowledge graph structure.
+Tech Stack
+
+Backend: Python, FastAPI, Pinecone, LangChain
+Frontend: Nuxt.js (Vue.js)
+Database: Pinecone (Vector Database)
+Containerization: Docker
+CI/CD: GitHub Actions
+APIs: Pinecone API, FastAPI endpoints
+Machine Learning: BERT for text embeddings
