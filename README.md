@@ -33,3 +33,15 @@ Containerization: Docker
 CI/CD: GitHub Actions
 APIs: Pinecone API, FastAPI endpoints
 Machine Learning: BERT for text embeddings
+GitHub Actions Workflow
+
+The GitHub Actions workflow automates the CI/CD process, ensuring that every push to the repository triggers the build and deployment process for both FastAPI and Nuxt.js.
+
+The workflow is set up in .github/workflows/ci.yml, and it will:
+
+Build and deploy the FastAPI Docker container.
+Build and deploy the Nuxt.js app.
+Optionally deploy to a cloud service (e.g., Vercel, AWS).
+License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
