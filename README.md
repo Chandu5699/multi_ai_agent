@@ -17,7 +17,7 @@ GitHub Actions Workflow
 License
 Overview
 
-This project sets up a FastAPI backend to serve as the API layer for querying multimodal data embeddings (text, audio, video) stored in Pinecone. The Nuxt.js frontend allows users to interact with the backend via a UI.
+This project uses a FastAPI backend as the API layer for querying multimodal data embeddings (text, audio, video) stored in Pinecone. The Nuxt.js frontend allows users to interact with the backend via a UI.
 
 Key Features:
 FastAPI: RESTful API to expose endpoints for querying the database.
@@ -44,10 +44,10 @@ Build and deploy the Nuxt.js app.
 Optionally deploy to a cloud service (e.g., Vercel, AWS).
 License
 
-This project implements a multi-agent system using graph-based Retrieval-Augmented Generation (RAG), designed for inference on multimodal data. It leverages FastAPI for serving the model and provides a robust, scalable architecture using Docker and CI/CD with GitHub Actions. The agents are designed to handle PDF, audio, and video data, providing flexible and efficient inference.
+This project implements a multi-agent system using graph-based Retrieval-Augmented Generation (RAG), designed for inference on multimodal data. It leverages FastAPI to Serve the model and provides a robust, scalable architecture using Docker and CI/CD with GitHub Actions. The agents are designed to handle PDF, audio, and video data, providing flexible and efficient inference.
 
 Features:
-Multi-agent system: Inference is distributed across multiple agents (master agent and child agents).
+Multi-agent system: Inference is distributed across multiple agents (master and child agents).
 Graph-based RAG: Uses prompt engineering and RAG to improve performance and scalability.
 Multimodal data processing: Supports PDFs, audio, and video files for inference.
 Scalable: Batch processing and epoch handling for large-scale production use cases.
